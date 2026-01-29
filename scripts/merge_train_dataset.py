@@ -1,8 +1,4 @@
 import os
-
-os.environ['HF_ENDPOINT'] = "https://hf-mirror.com"
-os.environ['TRANSFORMERS_OFFLINE'] = '1'
-os.environ['HF_DATASETS_OFFLINE'] = '1'
 import json
 import random
 from typing import Any, List
@@ -27,7 +23,6 @@ class EmbeddingFunction:
 embed_func = EmbeddingFunction("sentence-transformers/all-MiniLM-L6-v2", device="cuda:0")
 
 
-# --- 解析 dataset 和 database 的路径 ---
 def build_datasets_and_databases_path(
     root_path: str,
     model_name: str,
@@ -71,39 +66,29 @@ def get_output_folder(
 
 # --- merge sft datasets ---
 def _load_and_shuffle(path: str) -> List[Any]:
-    """读取单个 json 文件并打乱"""
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
     if not isinstance(data, list):
-        raise ValueError(f"{path} 的数据不是 list, 而是 {type(data)}")
+        raise ValueError()
 
     random.shuffle(data)
     return data
 
 def merge_data(datasets_path: list[str], output_file_path: str):
-    """
-    将多个数据集分别打乱后合并，
-    再对合并后的数据整体打乱，最后保存
-    """
     all_data: List[Any] = []
 
     for path in datasets_path:
         data = _load_and_shuffle(path)
         all_data.extend(data)
-
-    # 再整体打乱一次，保证混合均匀
     random.shuffle(all_data)
 
-    # ✅ 确保输出目录存在
     output_dir = os.path.dirname(output_file_path)
-    if output_dir:  # 防止 output_file_path 只是文件名
+    if output_dir:  
         os.makedirs(output_dir, exist_ok=True)
 
     with open(output_file_path, "w", encoding="utf-8") as f:
         json.dump(all_data, f, ensure_ascii=False, indent=2)
-
-    print(f"✅ 合并完成，共 {len(all_data)} 条数据，已保存至：{output_file_path}")
 
 
 # --- merge databases ---
@@ -122,7 +107,6 @@ def merge_database(
 
     os.makedirs(output_folder, exist_ok=True)
 
-    # 创建目标数据库
     merged_db = Chroma(
         persist_directory=output_folder,
         embedding_function=embed_func,
@@ -161,12 +145,11 @@ def merge_database(
 
 if __name__ == "__main__":
 
-    # 定义基本变量
     data_root_path = "results/data"
-    model = "Llama-3.1-8B-Instruct"  # Qwen3-4B-Instruct-2507, Llama-3.1-8B-Instruct
-    mas = "macnet"  # autogen, macnet
-    rag_memory = "gmemory"  # metagpt, voyager, generative, gmemory, oagent, master
-    datasets = ['kodcode', 'popqa', 'strategyqa', 'triviaqa']
+    model = "Qwen3-4B-Instruct-2507,"  # Qwen3-4B-Instruct-2507, Llama-3.1-8B-Instruct
+    mas = "autogen"  # autogen, macnet
+    rag_memory = "master"  # metagpt, voyager, generative, gmemory, oagent, master
+    datasets = ['kodcode', 'popqa', 'triviaqa']
 
     inputs = dict(
         root_path=data_root_path,
@@ -178,20 +161,14 @@ if __name__ == "__main__":
 
     datasets_file_path, database_path = build_datasets_and_databases_path(**inputs)
 
-    # 合成 sft datasets
     output_file_path = get_output_file_path(**inputs)
     merge_data(datasets_file_path, output_file_path)
-    print("--- 合成 SFT dataset 完毕 ---")
 
-    # 合成 rag database
     output_folder = get_output_folder(**inputs)
     merge_database(database_path, output_folder)
-    print("--- 合成 databases 完毕 ---")
 
-    # 检查 large db 中的 items
     large_db = Chroma(
         persist_directory=output_folder,
         embedding_function=embed_func,
     )
     db_size = len(large_db.get()["ids"])
-    print(f"--- database 中总数: {db_size} ---")
