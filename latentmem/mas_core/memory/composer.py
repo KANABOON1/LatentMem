@@ -11,7 +11,7 @@ from transformers import (
 
 from latentmem.utils.tools import CONVERSATION_TEMPLATE
 
-class Weaver(torch.nn.Module):
+class Composer(torch.nn.Module):
 
     def __init__(
         self, 

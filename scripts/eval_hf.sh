@@ -4,16 +4,16 @@ export CUDA_VISIBLE_DEVICES=0
 export TOKENIZERS_PARALLELISM=false
 
 MAS=autogen  # autogen, macnet, camel
-MAS_LLM=Qwen/Qwen3-4B-Instruct-2507 # Qwen/Qwen3-4B-Instruct-2507, meta-llama/Llama-3.1-8B-Instruct
+MAS_LLM=Qwen/Qwen3-4B-Instruct-2507
 LLM_SUFFIX="${MAS_LLM##*/}"
-USE_WEAVER=True  # True or False
+USE_WEAVER=True
 
-MAS_RAG=latentmem  # metagpt, generative, voyager, gmemory, oagent, latentmem
+MAS_RAG=latentmem
 
 DATASET=kodcode  # kodcode, triviaqa, popqa, pddl
-DATABASE_DIR="<Memory Repo Path>/rag_0"
+DATABASE_DIR="results/LatentMem-Qwen3-4B/data/rag_0"
 
-LOAD_MODEL_PATH="<Trained Model Path>/model.safetensors"
+LOAD_MODEL_PATH="results/LatentMem-Qwen3-4B/model/model.safetensors"
 
 python main.py \
     --cfg-path configs/latentmem/${DATASET}.yaml \

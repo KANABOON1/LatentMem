@@ -9,7 +9,7 @@ from common.registry import registry
 from latentmem.mas_core.base_centralized_memory import BaseCentralizedMemory
 from latentmem.mas_core.base_centralized_memory import Memory
 from latentmem.mas_core.memory.backbone import get_rag_cls, RAGMemoryResponse
-from latentmem.mas_core.memory.weaver import Weaver
+from latentmem.mas_core.memory.composer import Composer
 from latentmem.mas_core.memory import prompt
 from latentmem.utils.agent import LLMAgent
 from latentmem.utils.message import Trajectory
@@ -52,7 +52,7 @@ class LatentMem(BaseCentralizedMemory):
         self.use_weaver = use_weaver
 
         if self.use_weaver:
-            self.weaver = Weaver(
+            self.weaver = Composer(
                 llm_name_or_path,
                 latents_len=latents_len,
                 peft_config=peft_config,
