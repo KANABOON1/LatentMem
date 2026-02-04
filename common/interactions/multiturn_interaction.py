@@ -7,8 +7,8 @@ from common.interactions.base_interaction import (
     InteractionConfig, 
     InteractionManager
 )
-from memmaster.mas_core.base_memory_mas import BaseMemoryMAS
-from memmaster.utils.message import MessageGraph, Trajectory
+from latentmem.mas_core.base_memory_mas import BaseMemoryMAS
+from latentmem.utils.message import MessageGraph, Trajectory
     
 class MultiTurnInteractionManager(InteractionManager):
     def __init__(

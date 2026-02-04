@@ -1,7 +1,7 @@
 from transformers import GenerationConfig
 
-from memmaster.mas_core.base_memory_mas import BaseMemoryMAS
-from memmaster.utils.message import Trajectory
+from latentmem.mas_core.base_memory_mas import BaseMemoryMAS
+from latentmem.utils.message import Trajectory
 from common.interactions.base_interaction import (
     InteractionConfig, 
     InteractionManager,

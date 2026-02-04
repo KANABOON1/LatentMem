@@ -4,7 +4,7 @@ from typing import Dict, Optional
 from dataclasses import dataclass, field
 from abc import ABC, abstractmethod
 
-from memmaster.mas_core.base_memory_mas import BaseMemoryMAS
+from latentmem.mas_core.base_memory_mas import BaseMemoryMAS
 
 @dataclass
 class InteractionConfig:

@@ -8,7 +8,7 @@ from datetime import datetime
 from common.config import Config
 from common.logger import setup_logger
 from common.registry import registry
-from memmaster.runner import LatentMemRunner
+from latentmem.runner import LatentMemRunner
 
 def set_seed(random_seed: int, use_gpu: bool):
 

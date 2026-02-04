@@ -25,7 +25,7 @@ class Registry:
     def register_mas(cls, name):
 
         def wrap(mas_cls):
-            from memmaster.mas_core.base_memory_mas import BaseMemoryMAS
+            from latentmem.mas_core.base_memory_mas import BaseMemoryMAS
             assert issubclass(
                 mas_cls, BaseMemoryMAS
             ), "All MAS must inherit BaseMemoryMAS class"
@@ -44,7 +44,7 @@ class Registry:
     def register_memory(cls, name):
 
         def wrap(memory_cls):
-            from memmaster.mas_core.base_centralized_memory import BaseCentralizedMemory
+            from latentmem.mas_core.base_centralized_memory import BaseCentralizedMemory
             assert issubclass(
                 memory_cls, BaseCentralizedMemory
             ), "All memory must inherit BaseCentralizedMemory class"

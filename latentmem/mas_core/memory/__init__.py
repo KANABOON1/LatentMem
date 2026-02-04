@@ -1,0 +1,1 @@
+from latentmem.mas_core.memory.latentmem import LatentMem

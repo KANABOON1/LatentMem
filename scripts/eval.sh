@@ -8,15 +8,15 @@ MAS_LLM=Qwen/Qwen3-4B-Instruct-2507 # Qwen/Qwen3-4B-Instruct-2507, meta-llama/Ll
 LLM_SUFFIX="${MAS_LLM##*/}"
 USE_WEAVER=True  # True or False
 
-MAS_RAG=master  # metagpt, generative, voyager, gmemory, oagent, master
+MAS_RAG=latentmem  # metagpt, generative, voyager, gmemory, oagent, latentmem
 
 DATASET=kodcode  # kodcode, triviaqa, popqa, pddl
-DATABASE_DIR="<Memory Repo Path Here> (e.g., rag_0/)"
+DATABASE_DIR="<Memory Repo Path>/rag_0"
 
 LOAD_MODEL_PATH="<Trained Model Path Here>"
 
 python main.py \
-    --cfg-path configs/memmaster/${DATASET}.yaml \
+    --cfg-path configs/latentmem/${DATASET}.yaml \
     --options \
     model.mas.structure ${MAS} \
     model.mas.llm_name_or_path ${MAS_LLM} \

@@ -33,18 +33,18 @@ class Config:
     
     @staticmethod
     def build_model_config(config, **kwargs):
-        mas_structure = config.model.mas.structure
-        mas_config_path = os.path.join("configs", "structures.yaml")
-        with open(mas_config_path, "r", encoding="utf-8") as f:
-            structures = yaml.safe_load(f)
+        # mas_structure = config.model.mas.structure
+        # mas_config_path = os.path.join("configs", "structures.yaml")
+        # with open(mas_config_path, "r", encoding="utf-8") as f:
+        #     structures = yaml.safe_load(f)
         
-        if mas_structure not in structures:
-            raise ValueError()
+        # if mas_structure not in structures:
+        #     raise ValueError()
         
-        mas_params = structures[mas_structure]
-        if mas_params is not None:
-            for k, v in mas_params.items():
-                config.model.mas[k] = v
+        # mas_params = structures[mas_structure]
+        # if mas_params is not None:
+        #     for k, v in mas_params.items():
+        #         config.model.mas[k] = v
             
         return {"model": config.model}
 
