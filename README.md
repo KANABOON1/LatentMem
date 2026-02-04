@@ -56,7 +56,7 @@ Evaluate LatentMem:
 bash scripts/eval.sh
 ```
 
-🫡 Citation
+## 🫡 Citation
 If you find this repository helpful, a citation to our paper would be greatly appreciated:
 ```
 @misc{fu2026latentmemcustomizinglatentmemory,
@@ -70,5 +70,5 @@ If you find this repository helpful, a citation to our paper would be greatly ap
 }
 ```
 
-🙏 Acknowledgement
+## 🙏 Acknowledgement
 We sincerely thank [Search-R1](https://github.com/PeterGriffinJin/Search-R1?tab=readme-ov-file#retriever-environment-optional) for open-sourcing their search web environment.
