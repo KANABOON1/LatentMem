@@ -1,5 +1,7 @@
 # LatentMem: Customizing Latent Memory for Multi-Agent Systems
 
+> 🎉 LatentMem has been accepted to **EMNLP 2026 Main Conference**!
+
 ## 👋 Introduction
 This repo is the official implementation of ***LatentMem: Customizing Latent Memory for Multi-Agent Systems***.
 
@@ -14,7 +16,7 @@ conda env create -f environment.yml
 conda activate latentmem
 ```
 
-**Step 2: Search environment (optional)**  
+**Step 2: Search environment**  
 Please follow the instructions in the [Search-R1](https://github.com/PeterGriffinJin/Search-R1?tab=readme-ov-file#retriever-environment-optional) to configure the retriever environment (optional).
 
 ## 🤗 Quick Evaluation
@@ -47,7 +49,7 @@ bash scripts/eval_hf.sh
 ```
 
 ## ▶️ Training
-LatentMem adopts a two-stage training pipeline. In the first stage, raw trajectories are collected on the training split and stored in an experience bank. In the second stage, the memory composer is trained using the LMPO algorithm.
+LatentMem collects trajectories into an experience bank and optimizes the memory composer via LMPO, preceded by an SFT cold start.
 
 ### Step 1: Data Collection
 Collect raw trajectories into the experience bank:
@@ -55,13 +57,19 @@ Collect raw trajectories into the experience bank:
 bash scripts/data.sh
 ```
 
-### Step 2: LMPO Train
-Train the memory composer using LMPO:
+### Step 2: SFT Cold Start
+Initialize the memory composer with supervised fine-tuning on collected trajectories before LMPO:
 ```bash
-bash scripts/lmpo_train.sh
+bash scripts/sft.sh
 ```
 
-### Step 3: Evaluate
+### Step 3: LMPO Train
+Train the memory composer using LMPO:
+```bash
+bash scripts/lmpo.sh
+```
+
+### Step 4: Evaluate
 Evaluate LatentMem:
 ```bash
 bash scripts/eval.sh
@@ -72,7 +80,7 @@ If you find this repository helpful, a citation to our paper would be greatly ap
 ```
 @misc{fu2026latentmemcustomizinglatentmemory,
       title={LatentMem: Customizing Latent Memory for Multi-Agent Systems}, 
-      author={Muxin Fu and Guibin Zhang and Xiangyuan Xue and Yafu Li and Zefeng He and Siyuan Huang and Xiaoye Qu and Yu Cheng and Yang Yang},
+      author={Muxin Fu and Xiangyuan Xue and Yafu Li and Zefeng He and Siyuan Huang and Xiaoye Qu and Yu Cheng and Yang Yang},
       year={2026},
       eprint={2602.03036},
       archivePrefix={arXiv},

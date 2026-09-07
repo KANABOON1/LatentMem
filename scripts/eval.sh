@@ -16,13 +16,13 @@ DATABASE_DIR="<Memory Repo Path>/rag_0"
 LOAD_MODEL_PATH="<Trained Model Path>/model.safetensors"
 
 python main.py \
-    --cfg-path configs/latentmem/${DATASET}.yaml \
+    --cfg-path "configs/latentmem/${DATASET}.yaml" \
     --options \
     model.mas.structure ${MAS} \
-    model.mas.llm_name_or_path ${MAS_LLM} \
-    model.load_model_path ${LOAD_MODEL_PATH} \
-    model.memory.llm_name_or_path ${MAS_LLM} \
+    model.mas.llm_name_or_path "${MAS_LLM}" \
+    model.load_model_path "${LOAD_MODEL_PATH}" \
+    model.memory.llm_name_or_path "${MAS_LLM}" \
     model.memory.rag.mode ${MAS_RAG} \
-    model.memory.rag.database_dir ${DATABASE_DIR} \
+    model.memory.rag.database_dir "${DATABASE_DIR}" \
     model.memory.use_weaver ${USE_WEAVER} \
     run.mode eval \

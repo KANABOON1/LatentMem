@@ -73,7 +73,7 @@ class LatentMemRunner:
         }
         sft_inputs = dict(**self.config.run_cfg.sft, **updated_inputs)
         self.sft_config = SFTConfig(**sft_inputs)
-        grpo_inputs = dict(**self.config.run_cfg.grpo, **updated_inputs)
+        grpo_inputs = dict(**self.config.run_cfg.lmpo, **updated_inputs)
         self.grpo_config = GRPOConfig(**grpo_inputs)
     
     
@@ -183,7 +183,7 @@ class LatentMemRunner:
 
         return self.train_dataset.select(train_indices), self.valid_dataset.select(valid_indices)
 
-    def train(self, mode: Literal["sft", "grpo"]):
+    def train(self, mode: Literal["sft", "lmpo"]):
         
         log_trainable_params(self.memory_mas)
 

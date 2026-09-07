@@ -10,11 +10,11 @@ MAS_LLM=Qwen/Qwen3-4B-Instruct-2507  # Qwen/Qwen3-4B-Instruct-2507, meta-llama/L
 DATASET=kodcode  # in-domain datasets: kodcode, triviaqa, popqa
 
 python main.py \
-    --cfg-path configs/latentmem/${DATASET}.yaml \
+    --cfg-path "configs/latentmem/${DATASET}.yaml" \
     --options \
     model.mas.structure ${MAS} \
-    model.mas.llm_name_or_path ${MAS_LLM} \
-    model.memory.llm_name_or_path ${MAS_LLM} \
+    model.mas.llm_name_or_path "${MAS_LLM}" \
+    model.memory.llm_name_or_path "${MAS_LLM}" \
     model.memory.rag.mode ${MAS_RAG} \
     model.memory.use_weaver False \
     run.mode data \

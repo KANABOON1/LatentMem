@@ -41,7 +41,7 @@ dataset:
     mode: sft
     sft:
       valid_ratio: 0.1
-    grpo:
+    lmpo:
       valid_ratio: 0.1
 
 run: 
@@ -127,4 +127,4 @@ run:
   interaction:
     batch_size: 4  
     max_turns: 30  
-    max_obs_length: 2048  
+    max_obs_length: 2048
